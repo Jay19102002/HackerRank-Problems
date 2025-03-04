@@ -1,9 +1,11 @@
+# creation of a node
 class Node:
     """Represents a node in a singly linked list."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
+# operations of Linkedlist
 class LinkedList:
     """Represents a singly linked list."""
     def __init__(self):
@@ -46,6 +48,13 @@ class LinkedList:
         new_node.next = current.next
         current.next = new_node
 
+    def delete_at_head(self):
+        """Deletes the node at the head of the linked list."""
+        if self.head is None:
+            return
+        self.head = self.head.next
+
+
     def delete_at_position(self, position):
         """Deletes the node at the specified position in the linked list."""
         if position == 0:
@@ -63,13 +72,24 @@ class LinkedList:
 
         current.next = current.next.next
 
+    def delete_at_end(self):
+        if self.head is None or self.head.next is None:
+            return
+
+        current = self.head
+        # Traverse the list until we reach the second last node
+        while current.next.next:
+            current = current.next
+
+        current.next = None
+
     def print_list(self):
         """Prints the elements of the linked list."""
         current = self.head
         while current:
-            print(current.data, end=" -> " if current.next else "\n")
+            print(current.data, end = " -> " if current.next else "\n")
             current = current.next
-
+        
 
 
 linked_list = LinkedList()
@@ -77,8 +97,19 @@ linked_list = LinkedList()
 linked_list.insert_at_tail(10)
 linked_list.insert_at_tail(20)
 linked_list.insert_at_tail(30)
-linked_list.insert_at_head(5)
-linked_list.insert_at_position(25, 2)
-linked_list.delete_at_position(1)
+linked_list.print_list()
 
+linked_list.insert_at_head(5)
+linked_list.print_list()
+
+linked_list.insert_at_position(25, 2)
+linked_list.print_list()
+
+linked_list.delete_at_position(1)
+linked_list.print_list()
+
+linked_list.delete_at_head()
+linked_list.print_list()
+
+linked_list.delete_at_end()
 linked_list.print_list()
